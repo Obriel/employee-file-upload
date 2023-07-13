@@ -23,16 +23,15 @@ public class EmployeeFileController {
     private final EmployeeFileService employeeFileService;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("fileName") String fileName, @RequestParam("fileData") MultipartFile fileData) {
-        try {
-            byte[] bytes = fileData.getBytes();
-            employeeFileService.saveFile(fileName, bytes);
-            return ResponseEntity.ok("File uploaded successfully");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
-        }
+public ResponseEntity<String> uploadFile(@RequestParam("fileName") String fileName, @RequestBody byte[] fileData) {
+    try {
+        employeeFileService.saveFile(fileName, fileData);
+        return ResponseEntity.ok("File uploaded successfully");
+    } catch (IOException e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
     }
+}
 
 
     @GetMapping("/file/{id}")
