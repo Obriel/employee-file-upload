@@ -5,6 +5,7 @@ import com.fileupload.employeefileupload.repository.EmployeeFileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Service
@@ -13,7 +14,7 @@ public class EmployeeFileService {
 
     private final EmployeeFileRepository employeeFileRepository;
 
-    public void saveFile(String filename, byte[] content) {
+    public void saveFile(String filename, byte[] content) throws IOException {
         EmployeeFile employeeFile = new EmployeeFile();
         employeeFile.setFileName(filename);
         employeeFile.setFileData(content);
